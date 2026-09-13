@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
-<title>Tra cứu câu hỏi &amp; đáp án</title>
+<title>Tra cứu câu hỏi &amp; đáp án – Phân trang cuối danh sách</title>
 <style>
   * { box-sizing: border-box; }
 
@@ -312,7 +312,6 @@
 </header>
 
 <main class="wrap">
-  <nav id="paginationTop" class="pagination" aria-label="Chọn trang phía trên"></nav>
   <div id="results"></div>
   <nav id="paginationBottom" class="pagination" aria-label="Chọn trang phía dưới"></nav>
 </main>
@@ -348,7 +347,7 @@ let compactView = false;
 let filteredItems = data;
 let activeQuery = '';
 const elToggleOptions = document.getElementById('toggleOptions');
-const paginationBars = [document.getElementById('paginationTop'), document.getElementById('paginationBottom')];
+const paginationBars = [document.getElementById('paginationBottom')];
 // Chuẩn hóa một lần; tìm kiếm vẫn chạy trên toàn bộ câu hỏi và lựa chọn.
 const searchIndex = data.map(item => ({ item, text: normalizeVN(getSearchableText(item)) }));
 
@@ -368,9 +367,7 @@ function renderPagination(totalPages) {
         currentPage = page;
         render(filteredItems, activeQuery);
         window.scrollTo({ top: 0, behavior: 'auto' });
-        const currentButton = bar.querySelector('[aria-current="page"]');
-        if (currentButton && bar === paginationBars[0]) currentButton.focus({ preventScroll: true });
-        else paginationBars[0].querySelector('[aria-current="page"]')?.focus({ preventScroll: true });
+        elSearch.focus({ preventScroll: true });
       });
       bar.appendChild(button);
     }
